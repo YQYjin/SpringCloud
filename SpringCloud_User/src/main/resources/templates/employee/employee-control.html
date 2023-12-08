@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>修改员工信息</title>
+    <!-- 引入layui的CSS文件 -->
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.7/css/layui.css">
+    <style>
+        /* 自定义样式 */
+        .custom-header {
+            font-size: 24px;
+            /* 调整标题字体大小 */
+        }
+
+        .custom-welcome {
+            font-size: 20px;
+            /* 欢迎消息字体大小 */
+        }
+
+        .button-bar {
+            display: flex;
+            background-color: #333;
+            /* 设置背景颜色 */
+            padding: 10px;
+            /* 设置内边距 */
+            padding-right: 20px;
+            text-align: center;
+            /* 文本居中 */
+            justify-content: flex-end;
+        }
+
+        .high-layui-input {
+            height: 80px;
+            /* Adjust the height as needed */
+        }
+
+        .custom-button-left {
+            margin-left: 110px;
+            /* Adjust the distance from the left edge as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <!-- 顶端消息-->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    
+                    </div>
+                    <div class="layui-card-body layui-edge-right">
+                        <button class="layui-btn " id="backBtn">返回</button>
+                    </div>
+                </div>
+
+        <div class="layui-row">
+            <!-- 客户信息左侧部分 -->
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    
+
+                        <div class="layui-card-header custom-header layui-edge-right">员工信息</div>
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">ID:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="id" lay-verify="required" class="layui-input"
+                                        placeholder="待查询" disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <p>
+                                    <label class="layui-form-label">姓名:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="name" lay-verify="required" class="layui-input">
+                                </div>
+                                </p>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">性别:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="gender" lay-verify="required" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">电话:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="phone" lay-verify="required" class="layui-input">
+                                </div>
+                            </div>
+
+                        </form>
+                        <button class="layui-btn custom-button-left " id="modifyBtn">修改员工信息</button>
+                        <button class="layui-btn layui-btn-danger custom-button-left" id="deleteBtn"
+                            onclick="confirmAction()">删除该员工</button>
+                    </div>
+                </div>
+                <div class="layui-col-md6">
+                    <div class="layui-card">
+                        <p>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                        </p>
+                        
+    
+                            <div class="layui-card-header custom-header layui-edge-right">修改密码</div>
+                            <form class="layui-form">
+                                
+                                <div class="layui-form-item">
+                                    <p>
+                                        <label class="layui-form-label">原密码:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="nowPassword" lay-verify="required" class="layui-input">
+                                    </div>
+                                    </p>
+                                </div>
+    
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">新密码:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="newPassword" lay-verify="required" class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">确认密码:</label>
+                                    <div class="layui-input-inline">
+                                        <input type="password" id="confirmPassword" lay-verify="required" class="layui-input">
+                                    </div>
+                                </div>
+                            </form>
+                            <button class="layui-btn custom-button-left " id="modifyPassword">修改密码</button>
+                            
+                        </div>
+                    </div>
+            </div>
+            
+
+        </div>
+    </div>
+
+
+
+
+    <!-- 引入layui的JS文件 -->
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/layui/2.5.7/layui.js"></script>
+
+    <!-- 引入jQuery和Bootstrap的JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+        layui.use(['form', 'laydate'], function () {
+            var form = layui.form;
+            var laydate = layui.laydate;
+        });
+        function confirmAction() {
+            layer.confirm('您确定要删除该客户吗？', {
+                btn: ['确定', '取消'],
+                title: '确认操作'
+            }, function () {
+                // 用户点击确定执行的操作
+                deleteWorker();
+
+                layer.closeAll(); // 关闭确认窗口
+            }, function () {
+                // 用户点击取消执行的操作
+
+                layer.closeAll(); // 关闭确认窗口
+            });
+        }
+        var url=window.location.href;
+        var employeeID = url.match(/\/employeeinfo\/(\d+)$/)[1];
+        //初始化页面
+        $(document).ready(function () {
+            console.log("ready");
+            loadInfo(employeeID);
+        });
+
+        function loadInfo() {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/getemployeeinfo/" + employeeID,
+                success: function (response) {
+                    console.log("员工信息返回" + response);
+                    $("#id").val(response.id);
+                    $("#name").val(response.username);
+                    $("#gender").val(response.sex);
+                    $("#phone").val(response.phoneNumber);
+
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        }
+
+        $("#modifyBtn").click(function (event) {
+            event.preventDefault();
+            let newName = $("#name").val();
+            let newGender = $("#gender").val();
+            let newPhone = $("#phone").val();
+            let formData = {
+                id: employeeID,
+                newName: newName,
+                newSex: newGender,
+                newPhone: newPhone,
+            }
+            console.log(formData);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/modifyemployee",
+                data: formData,
+                success: function (response) {
+                    if (response == "success") {
+                        alert("修改成功");
+                        loadInfo()
+                    } else {
+                        alert("修改失败");
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        });
+        $("#modifyPassword").click(function (event) {
+            event.preventDefault();
+            let nowPassword = $("#nowPassword").val();
+            let newPassword = $("#newPassword").val();
+            let confirmPassword = $("#confirmPassword").val();
+            if(newPassword!=confirmPassword){
+                alert("两次输入的密码不一致");
+                return;
+            }
+            let formData = {
+                id: employeeID,
+                nowPassword: nowPassword,
+                newPassword: newPassword,
+            }
+            console.log(formData);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/modifyemployee/password",
+                data: formData,
+                success: function (response) {
+                    if (response == "success") {
+                        alert("修改成功");
+                        loadInfo()
+                    } else {
+                        alert("修改失败");
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        });
+
+        function deleteWorker(event) {
+            
+            let formData = {
+                id: employeeID
+            };
+            console.log(formData);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/modifyemployee/delete",
+                data: formData, //将表单转换为JSON格式
+                success: function (response) {
+                    console.log("Success" + response);
+                    if (response == 'success') {
+                        window.alert("已删除该员工");
+                        window.history.back();
+                    } else {
+                        window.alert("删除失败" + response);
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        }
+
+
+
+
+        // 返回
+        $("#backBtn").click(function () {
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>

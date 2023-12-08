@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>员工管理页</title>
+    <!-- 引入layui的CSS文件 -->
+    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.7/css/layui.css">
+    <style>
+        /* 自定义样式 */
+        .custom-header {
+            font-size: 24px;
+            /* 调整标题字体大小 */
+        }
+
+        .custom-welcome {
+            font-size: 20px;
+            /* 欢迎消息字体大小 */
+        }
+
+        .button-bar {
+            display: flex;
+            background-color: #333;
+            /* 设置背景颜色 */
+            padding: 10px;
+            /* 设置内边距 */
+            padding-right: 20px;
+            text-align: center;
+            /* 文本居中 */
+            justify-content: flex-end;
+        }
+
+        .high-layui-input {
+            height: 80px;
+            /* Adjust the height as needed */
+        }
+
+        .custom-button-left {
+            margin-left: 110px;
+            /* Adjust the distance from the left edge as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <!-- 顶端消息-->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+
+                </div>
+                <div class="layui-card-body layui-edge-right">
+                    <button class="layui-btn " id="backBtn">返回</button>
+                </div>
+            </div>
+        </div>
+
+    <div class="layui-row">
+        <!-- 订单信息 -->
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                </p>
+                
+
+                    <div class="layui-card-header custom-header layui-edge-right">员工列表</div>
+                    <div class="layui-container">
+                        <!-- 这里设置display: none 是避免多余的表头显示 -->
+                        <table class="layui-table" lay-filter="employeeTable" id="employeeTable"style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th lay-data="{field:'id', width:100}">员工编号</th>
+                                    <th lay-data="{field:'username', width:100}">员工姓名</th>
+                                    <th lay-data="{field:'gender', width:100}">员工性别</th>
+                                    <th lay-data="{field:'phoneNumber', width:100}">员工电话</th>
+                                    <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="layui-row">
+        <!-- 订单信息 -->
+        <div class="layui-col-md12">
+            <div class="layui-card">
+                <p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+
+                </p>
+                
+
+                    <div class="layui-card-header custom-header layui-edge-right">查询员工</div>
+                    <div class="layui-container">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">员工姓名:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="queryName" lay-verify="required" class="layui-input"
+                                    placeholder="请输入要查询的员工姓名" >
+                            </div>
+                            <button class="layui-btn custom-button-left" id="queryBtn">查询</button>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">员工电话:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="queryPhone" lay-verify="required" placeholder="请输入要查询的员工电话"
+                                    class="layui-input">
+                            </div>
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <div class="layui-card-body">
+                    <div class="layui-container">
+                        <!-- 这里设置display: none 是避免多余的表头显示 -->
+                        <table class="layui-table" lay-filter="employeeQueryTable" id="employeeQueryTable" style="display: none;">
+                            <thead>
+                                <tr>
+                                    <th lay-data="{field:'id', width:100}">员工编号</th>
+                                    <th lay-data="{field:'username', width:100}">员工姓名</th>
+                                    <th lay-data="{field:'gender', width:100}">员工性别</th>
+                                    <th lay-data="{field:'phoneNumber', width:100}">员工电话</th>
+                                    <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <div class="layui-row">
+        <!-- 客户信息左侧部分 -->
+        <div class="layui-col-md6">
+            <div class="layui-card">
+                <p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </p>
+                
+
+                    <div class="layui-card-header custom-header layui-edge-right">添加新员工</div>
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">ID:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="addID" lay-verify="required" class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">姓名:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="addName" lay-verify="required" class="layui-input" >
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">性别:</label>
+                            <div class="layui-input-block">
+                                <input type="radio" name="gender" value="男" title="男" >
+                                <input type="radio" name="gender" value="女" title="女">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">电话:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="addPhone" lay-verify="required" class="layui-input" >
+                            </div>
+                        </div>
+                    </form>
+                    <button class="layui-btn custom-button-left" id="addNewBtn">添加</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+
+    <!-- 表格中的按钮 -->
+    <script type="text/html" id="bar2">
+            <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="click">管理</button>
+        </script>
+
+
+
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/layui/2.5.7/layui.js"></script>
+
+    <!-- 引入jQuery和Bootstrap的JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="/employee-management.js"></script>
+    <!-- 表格中的按钮 -->
+
+    <script>
+        layui.use(['form', 'laydate', 'table'], function () {
+            var form = layui.form;
+            var laydate = layui.laydate;
+            var table = layui.table;
+
+            // 网页加载后渲染订单表格和加载信息
+            $(document).ready(function () {
+                renderEmployeeTable(table);
+            });
+            $("#addNewBtn").click(function () {
+                let addID = $("#addID").val();
+                let addName = $("#addName").val();
+                let addPhone = $("#addPhone").val();
+                let addGender = document.querySelector('input[name="gender"]:checked').value;
+                let formData = {
+                    addID: addID,
+                    addName: addName,
+                    addPhone: addPhone,
+                    addSex: addGender
+                }
+                $.ajax({
+                    url: "http://localhost:8080/admin/addemployee",
+                    type: "POST",
+                    data: formData,
+                    success: function (data) {
+                        if (data == "success") {
+                            alert("添加成功");
+                            window.location.reload();
+                        } else {
+                            alert("添加失败");
+                        }
+                    },
+                    error: function (error) {
+                        console.log("Error:" + error);
+                    }
+                });
+            });
+            $("#queryBtn").click(function () {
+                let queryName = $("#queryName").val();
+                let queryPhone = $("#queryPhone").val();
+                renderEmployeeQueryTable(table, queryName, queryPhone)
+            });
+            // 返回
+            $("#backBtn").click(function () {
+                window.history.back();
+            });
+        });
+
+
+    </script>
+</body>
+
+</html>

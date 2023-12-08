@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>修改客户信息</title>
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.7/css/layui.css">
+    <style>
+        /* 自定义样式 */
+        .custom-header {
+            font-size: 24px;
+            /* 调整标题字体大小 */
+        }
+
+        .custom-welcome {
+            font-size: 20px;
+            /* 欢迎消息字体大小 */
+        }
+
+        .button-bar {
+            display: flex;
+            background-color: #333;
+            /* 设置背景颜色 */
+            padding: 10px;
+            /* 设置内边距 */
+            padding-right: 20px;
+            text-align: center;
+            /* 文本居中 */
+            justify-content: flex-end;
+        }
+
+        .high-layui-input {
+            height: 80px;
+            /* Adjust the height as needed */
+        }
+
+        .custom-button-left {
+            margin-left: 110px;
+            /* Adjust the distance from the left edge as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <!-- 顶端消息-->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    
+                    </div>
+                    <div class="layui-card-body layui-edge-right">
+                        <button class="layui-btn " id="backBtn">返回</button>
+                    </div>
+                </div>
+            </div>
+        <div class="layui-row">
+            <!-- 客户信息左侧部分 -->
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    
+
+                        <div class="layui-card-header custom-header layui-edge-right">客户信息</div>
+                        <form class="layui-form">
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">ID:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="userID" lay-verify="required" class="layui-input " disabled>
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <p>
+                                    <label class="layui-form-label">姓名:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="userName" lay-verify="required" class="layui-input">
+                                </div>
+                                </p>
+                            </div>
+
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">性别:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="gender" lay-verify="required" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">电话:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="phone" lay-verify="required" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">消费额:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="consumption" lay-verify="required" class="layui-input">
+                                </div>
+                            </div>
+                            <div class="layui-form-item">
+                                <label class="layui-form-label">地址:</label>
+                                <div class="layui-input-inline">
+                                    <input type="text" id="address" lay-verify="required"
+                                        class="layui-input high-layui-input ">
+                                </div>
+                            </div>
+                        </form>
+                        <button class="layui-btn custom-button-left " id="modifyBtn">修改信息</button>
+                        <button class="layui-btn layui-btn-danger custom-button-left" id="deleteBtn" onclick="confirmAction()">删除该客户</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+
+    <!-- 引入layui的JS文件 -->
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/layui/2.5.7/layui.js"></script>
+    <!-- 引入jQuery和Bootstrap的JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+        layui.use(['form', 'laydate', 'layer'], function () {
+            var layer = layui.layer;
+        });
+        var url=window.location.href;
+        var customerID = url.match(/\/customerModify\/(\d+)$/)[1];
+
+        //确认删除
+        function confirmAction() {
+            layer.confirm('您确定要删除该客户吗？', {
+                btn: ['确定', '取消'],
+                title: '确认操作'
+            }, function () {
+                // 用户点击确定执行的操作
+                deleteWorker();
+
+                layer.closeAll(); // 关闭确认窗口
+            }, function () {
+                // 用户点击取消执行的操作
+
+                layer.closeAll(); // 关闭确认窗口
+            });
+        }
+        //初始化页面
+        $(document).ready(function () {
+            console.log("ready");
+            loadCustomerInfo(customerID);
+        });
+
+        function loadCustomerInfo(customerID) {
+            $.ajax({
+                type: "GET",
+                url: "http://localhost:8080/getcustomerinfo/" + customerID,
+                success: function (response) {
+                    console.log("客户信息返回" + response);
+                    $("#userID").val(response.id);
+                    $("#userName").val(response.username);
+                    $("#gender").val(response.sex);
+                    $("#phone").val(response.phoneNumber);
+                    $("#consumption").val(response.totalConsumption);
+                    $("#address").val(response.address);
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        }
+
+        $("#modifyBtn").click(function (event) {
+            //event.preventDefault();
+            let newName = $("#userName").val();
+            let newGender = $("#gender").val();
+            let newPhone = $("#phone").val();
+            let newConsumption = $("#consumption").val();
+            let newAddress = $("#address").val();
+            let formData = {
+                id: customerID,
+                newName: newName,
+                newSex: newGender,
+                newPhone: newPhone,
+                newConsumption: newConsumption,
+                newAddress: newAddress
+            }
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/modifycustomer",
+                data: formData,
+                success: function (response) {
+                    if (response == "success") {
+                        alert("修改成功");
+                        loadCustomerInfo(customerID);
+                    } else {
+                        alert("修改失败");
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        });
+
+        function deleteWorker(event) {
+            
+            let formData = {
+                id: customerID
+            };
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/modifycustomer/delete",
+                data: formData, //将表单转换为JSON格式
+                success: function (response) {
+                    console.log("Success" + response);
+                    if (response == 'success') {
+                        window.alert("已删除该员工");
+                        window.history.back();
+                    } else {
+                        window.alert("删除失败" + response);
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        }
+
+
+
+
+        // 返回
+        $("#backBtn").click(function () {
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>

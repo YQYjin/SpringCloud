@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>修改产品信息</title>
+    <!-- 引入layui的CSS文件 -->
+
+    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.7/css/layui.css">
+    <style>
+        /* 自定义样式 */
+        .custom-header {
+            font-size: 24px;
+            /* 调整标题字体大小 */
+        }
+
+        .custom-welcome {
+            font-size: 20px;
+            /* 欢迎消息字体大小 */
+        }
+
+        .button-bar {
+            display: flex;
+            background-color: #333;
+            /* 设置背景颜色 */
+            padding: 10px;
+            /* 设置内边距 */
+            padding-right: 20px;
+            text-align: center;
+            /* 文本居中 */
+            justify-content: flex-end;
+        }
+
+        .high-layui-input {
+            height: 80px;
+            /* Adjust the height as needed */
+        }
+
+        .custom-button-left {
+            margin-left: 110px;
+            /* Adjust the distance from the left edge as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="layui-container">
+        <div class="layui-row">
+            <!-- 顶端消息-->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+
+                </div>
+                <div class="layui-card-body layui-edge-right">
+                    <button class="layui-btn " id="backBtn">返回</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="layui-row">
+            <!-- 客户信息左侧部分 -->
+            <div class="layui-col-md6">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+
+
+                    <div class="layui-card-header custom-header layui-edge-right">产品信息</div>
+                    <form class="layui-form">
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">ID:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="queryID" lay-verify="required" class="layui-input"
+                                    placeholder="待查询" disabled>
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <p>
+                                <label class="layui-form-label">名称:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="queryName" lay-verify="required" class="layui-input"
+                                    placeholder="待查询">
+                            </div>
+
+                            </p>
+                        </div>
+
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">单价:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="queryPrice" lay-verify="required" class="layui-input"
+                                    placeholder="待查询">
+                            </div>
+                        </div>
+                        <div class="layui-form-item">
+                            <label class="layui-form-label">库存:</label>
+                            <div class="layui-input-inline">
+                                <input type="text" id="queryInventory" lay-verify="required" class="layui-input"
+                                    placeholder="待查询">
+                            </div>
+                        </div>
+
+                    </form>
+                    <button class="layui-btn custom-button-left" id="modifyBtn">修改产品信息</button>
+                    <button class="layui-btn layui-btn-danger custom-button-left" id="deleteBtn"
+                        onclick="confirmAction()">删除该产品</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+
+
+
+
+
+    <!-- 引入layui的JS文件 -->
+    <script src="/layui/layui.js"></script>
+    <script src="/static/layui/layui.js"></script>
+    <script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/layui/2.5.7/layui.js"></script>
+    <!-- 引入jQuery和Bootstrap的JavaScript -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+
+
+    <script>
+        layui.use(['form', 'laydate'], function () {
+            var form = layui.form;
+            var laydate = layui.laydate;
+        });
+        var url = window.location.href;
+        var productID = url.match(/\/productModify\/(\d+)$/)[1];
+        //确认删除
+        function confirmAction() {
+            layer.confirm('您确定要删除该产品吗？', {
+                btn: ['确定', '取消'],
+                title: '确认操作'
+            }, function () {
+                // 用户点击确定执行的操作
+                deleteProdcut();
+
+                layer.closeAll(); // 关闭确认窗口
+            }, function () {
+                // 用户点击取消执行的操作
+
+                layer.closeAll(); // 关闭确认窗口
+            });
+        }
+        $(document).ready(function () {
+            console.log("ready");
+            loadproductInfo(productID);
+        });
+        function loadproductInfo(productID) {
+            let formData = {
+                id: productID
+            };
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/admin/getproduct",
+                data: formData,
+                success: function (response) {
+                    console.log("产品信息返回" + response);
+                    $("#queryID").val(response.id);
+                    $("#queryName").val(response.productName);
+                    $("#queryPrice").val(response.unitPrice);
+                    $("#queryInventory").val(response.inventoryNum);
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        }
+
+        $("#modifyBtn").click(function () {
+            let id = $("#queryID").val();
+            let name = $("#queryName").val();
+            let price = $("#queryPrice").val();
+            let inventory = $("#queryInventory").val();
+            let formData = {
+                "id": id,
+                "name": name,
+                "price": price,
+                "inventory": inventory
+            };
+            console.log(formData);
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/admin/modifyproduct",
+                data: formData,
+                success: function (response) {
+                    if (response == "success") {
+                        alert("修改成功");
+                        window.location.reload();
+                    }
+                    else {
+                        alert("修改失败");
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        });
+        function deleteProdcut(event) {
+
+            let formData = {
+                id: productID
+            };
+            $.ajax({
+                type: "POST",
+                url: "http://localhost:8080/admin/deleteproduct",
+                data: formData, //将表单转换为JSON格式
+                success: function (response) {
+                    console.log("Success" + response);
+                    if (response == 'success') {
+                        window.alert("删除成功");
+                        window.history.back();
+                    } else {
+                        window.alert("删除失败" + response);
+                    }
+                },
+                error: function (error) {
+                    console.log("Error:" + error);
+                }
+            });
+        }
+
+        // 返回
+        $("#backBtn").click(function () {
+            window.history.back();
+        });
+    </script>
+</body>
+
+</html>

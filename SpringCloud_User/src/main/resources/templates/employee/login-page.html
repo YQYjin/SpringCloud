@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+    
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="_csrf" content="${_csrf.token}" />
+    <meta name="_csrf_header" content="${_csrf.headerName}" />
+    <title>登录</title>
+    <!-- 引入Bootstrap样式 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.layuicdn.com/layui/css/layui.css">
+    <style>
+        /* 自定义样式 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+            height: 100vh;
+        }
+
+        .form-group {
+            width: 300px;
+            /* 调整输入框宽度 */
+            margin-bottom: 10px;
+            /* 调整表单组之间的垂直间距 */
+        }
+
+        .login-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .register-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-group {
+            width: 300px;
+            /* 调整按钮组的宽度 */
+            margin-top: 10px;
+            /* 调整按钮组与上方元素的间距 */
+            text-align: center;
+            /* 居中按钮组 */
+        }
+    </style>
+</head>
+
+<!-- 这里如果使用ajax提交就会收不到用户名，只能使用form表单提交，怪 -->
+<body>
+    <div class="layui-row layui-col-space15">
+        
+        <p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </p>
+    </div>
+    <!-- 大标题 -->
+    <div class="layui-row layui-col-space15">
+        
+        <div class="layui-col-md12">
+            
+            <div class="layui-card">
+                <div class="layui-card-body">
+                    <h1 class="layui-text-center" style="font-size: 36px; color: #333; text-align:center;">欢迎来到订单管理系统</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+        </p>
+        <h2>用户登录</h2>
+        <div th:if="${param.error != null}" style="color: red;">
+            <p>Login failed, please check your username and password.</p>
+        </div>
+        <form method="post" action="http://localhost:8080/employee/login">
+            <div class="form-group">
+                <label for="username" style="margin-right: 10px;">用户名:</label>
+                <input type="text" class="form-control" name="username" id="username" placeholder="请输入用户名" required>
+            </div>
+            <div class="form-group">
+                <label for="password" style="margin-right: 35px;">密码:</label>
+                <input type="password" class="form-control" name="password" id="password" placeholder="请输入密码" required>
+            </div>
+            <div class="button-group">
+                <button type="submit" class="btn btn-primary">登录</button>
+                <a href="/adminloginpage" class="btn btn-link">管理员登录</a>
+            </div>
+        </form>
+    </div>
+
+
+
+</body>
+
+</html>

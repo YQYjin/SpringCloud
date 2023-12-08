@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <title>管理员主页</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.staticfile.org/layui/2.5.7/css/layui.css">
+    <style>
+        /* 自定义表格行高 */
+        .layui-table-cell {
+            height: auto;
+            white-space: normal;
+        }
+    </style>
+    <style>
+        /* 自定义样式 */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .form-group {
+            width: 300px;
+            /* 调整输入框宽度 */
+            margin-bottom: 10px;
+            /* 调整表单组之间的垂直间距 */
+        }
+
+        .login-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .register-button {
+            display: flex;
+            justify-content: center;
+        }
+
+        .button-group {
+            width: 300px;
+            /* 调整按钮组的宽度 */
+            margin-top: 10px;
+            /* 调整按钮组与上方元素的间距 */
+            text-align: center;
+            /* 居中按钮组 */
+        }
+
+        /* 自定义样式 */
+        .custom-header {
+            font-size: 24px;
+            /* 调整标题字体大小 */
+        }
+
+        .custom-welcome {
+            font-size: 20px;
+            /* 欢迎消息字体大小 */
+        }
+
+        .left-aligned-input {
+            margin-left: 0;
+            /* 设置左边距为0，让文本框紧靠左边界 */
+        }
+    </style>
+</head>
+
+<div>
+    <div class="layui-container">
+        <div class="layui-row">
+            <!-- 左侧部分 -->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    <!-- <div class="layui-card-header custom-header" th:text="${userName+',欢迎来到管理界面!'}"> -->
+                </div>
+                <div class="layui-card-body layui-edge-right">
+                    <a href="http://localhost:8080/admin/logout" class="layui-btn ">登出</a>
+                    <button class="layui-btn " id="employeeControl">员工管理</button>
+                    <button class="layui-btn " id="productControl">产品管理</button>
+
+                </div>
+            </div>
+
+        <!-- <div class="layui-row">
+            
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+                    <div class="layui-card-header custom-header layui-edge-right">全部订单</div>
+                    <div class="layui-container">
+                        <table class="layui-table" lay-filter="orderTable" id="orderTable" >
+                            <thead>
+                                <tr>
+                                    <th lay-data="{field:'id', width:100}">订单编号</th>
+                                    <th lay-data="{field:'orderTime', width:100}">下单时间</th>
+                                    <th lay-data="{field:'amountMoney', width:100}">订单金额</th>
+                                    <th lay-data="{field:'content', width:100}">订单内容</th>
+                                    <th lay-data="{field:'completionStatus', width:100}">完成状态</th>
+                                    <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作</th>
+                                </tr>
+                            </thead>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div> -->
+        <div class="layui-row">
+            <!-- 左侧部分 -->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+
+                        <div class="layui-card-header custom-header layui-edge-right">全部订单</div>
+                        <div class="layui-container">
+                            <!-- 这里设置display: none 是避免多余的表头显示 -->
+                            <table class="layui-table" lay-filter="orderTable" id="orderTable" style="display: none;">
+                                <thead>
+                                    <tr>
+                                        <th lay-data="{field:'id', width:100}">订单编号</th>
+                                        <th lay-data="{field:'orderTime', width:100}">下单时间</th>
+                                        <th lay-data="{field:'amountMoney', width:100}">订单金额</th>
+                                        <th lay-data="{field:'completionStatus', width:100}">完成状态</th>
+                                        <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        <div class="layui-row">
+            <!-- 左侧部分 -->
+            <div class="layui-col-md12">
+                <div class="layui-card">
+                    <p>
+                        <br>
+                        <br>
+                        <br>
+                    </p>
+
+                        <div class="layui-card-header custom-header layui-edge-right">全部客户</div>
+                        <div class="layui-container">
+                            <!-- 这里设置display: none 是避免多余的表头显示 -->
+                            <table class="layui-table" lay-filter="customerTable" id="customerTable" style="display: none;">
+                                <thead>
+                                    <tr>
+                                        <th lay-data="{field:'id', width:100}">客户编号</th>
+                                        <th lay-data="{field:'username', width:100}">客户姓名</th>
+                                        <th lay-data="{field:'gender', width:100}">客户性别</th>
+                                        <th lay-data="{field:'phoneNumber', width:100}">客户电话</th>
+                                        <th lay-data="{field:'totalConsumption', width:100}">消费额</th>
+                                        <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作
+                                        </th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/html" id="bar">
+        <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="click">管理</button>
+    </script>
+
+
+<!-- 引入jQuery和Bootstrap的JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+<script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/layui/2.5.7/layui.js"></script>
+<!-- 渲染请假审批表格的js -->
+<script src="https://cdn.staticfile.org/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdn.staticfile.org/layui/2.5.7/layui.js"></script>
+
+<script src="/admin-home.js"></script>
+
+<script>
+    layui.use(['form', 'laydate', 'table'], function () {
+        var form = layui.form;
+        var laydate = layui.laydate;
+        var table = layui.table;
+
+        // 网页加载后渲染订单表格和加载信息
+        $(document).ready(function () {
+            renderOrderData(table);
+            renderCustomerData(table);
+        });
+
+        $("#employeeControl").click(function () {
+            window.location.href = "http://localhost:8080/admin/employeecontrol";
+        });
+        $("#productControl").click(function () {
+            window.location.href = "http://localhost:8080/admin/productcontrol";
+        });
+    });
+
+
+
+
+</script>
+</body>
+
+</html>
