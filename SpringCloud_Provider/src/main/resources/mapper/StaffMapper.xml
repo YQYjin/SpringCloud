@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springcloud_provider.mapper.StaffMapper">
+    <select id="getOneById" resultType="com.example.springcloud_provider.bean.StaffBean">
+        select * from staff
+        where id=#{id}
+    </select>
+    <update id="updateStaff">
+        update staff
+        set
+        username=#{username},
+        sex=#{sex},
+        phone_number=#{phoneNumber}
+        where id=#{id}
+    </update>
+    <delete id="deleteStaff">
+        delete from staff
+        where id=#{id}
+    </delete>
+    <select id="getAll" resultType="com.example.springcloud_provider.bean.StaffBean">
+        select *
+        from staff
+    </select>
+    <select id="getByNamePhone" resultType="com.example.springcloud_provider.bean.StaffBean">
+        SELECT * from staff where username like CONCAT("%",#{username},"%") AND phone_number like CONCAT("%",#{phoneNumber},"%")
+    </select>
+    <select id="getByName" resultType="com.example.springcloud_provider.bean.StaffBean">
+        SELECT * from staff where username = #{username}
+    </select>
+    <insert id="addOne">
+        insert into staff(id,username,sex,phone_number)
+    values (#{id},#{username},#{sex},#{phoneNumber})
+    </insert>
+    <update id="updatePwd">
+        update staff
+        set
+            password=#{newPassword}
+        where id=#{id} and password=#{password}
+    </update>
+</mapper>

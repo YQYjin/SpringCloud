@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springcloud_provider.mapper.OrdersMapper">
+    <select id="getById" resultType="com.example.springcloud_provider.bean.OrdersBean">
+        SELECT * FROM orders where id=#{id}
+    </select>
+    <select id="getAllByCustomerId" resultType="com.example.springcloud_provider.bean.OrdersBean">
+        SELECT * FROM orders where consumer_id=#{id}
+        order by order_time desc
+    </select>
+    <insert id="addOneOrder" >
+        insert into orders(amount_money,order_time,completion_status,consumer_id,notes) values (#{amountMoney},NOW(),0,
+                                #{id},#{notes})
+    </insert>
+    <update id="changeStatus">
+        update orders
+        set completion_status=#{completionStatus}
+        where id=#{id}
+    </update>
+    <delete id="deleteOrder">
+        delete from orders
+        where id=#{orderID}
+    </delete>
+    <select id="getAll" resultType="com.example.springcloud_provider.bean.OrdersBean">
+        select * from orders
+        order by order_time desc
+    </select>
+    <select id="getNew" resultType="String">
+        select id from orders
+        order by order_time desc
+        limit 1
+    </select>
+
+</mapper>

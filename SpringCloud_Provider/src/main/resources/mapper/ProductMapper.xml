@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springcloud_provider.mapper.ProductMapper">
+    <insert id="addOneProduct">
+        insert into product(id,product_name,unit_price) values (#{productId},#{productName},#{unitPrice})
+    </insert>
+    <select id="getAll" resultType="com.example.springcloud_provider.bean.ProductBean">
+        select * from product
+    </select>
+    <select id="getByName" resultType="com.example.springcloud_provider.bean.ProductBean">
+        SELECT * from product
+        where product_name like CONCAT("%",#{productName},"%")
+    </select>
+    <update id="update">
+        update product
+        set
+            product_name=#{productName},
+            unit_price=#{unitPrice},
+            inventory_num=#{inventoryNum}
+        where id=#{id}
+    </update>
+    <select id="getOneById" resultType="com.example.springcloud_provider.bean.ProductBean">
+        select * from product
+        where id=#{id}
+    </select>
+    <delete id="delete">
+        delete from product
+        where id=#{id}
+    </delete>
+    <insert id="addOne">
+        insert into product(id,product_name,unit_price)
+        values(#{id},#{productName},#{unitPrice})
+    </insert>
+    <select id="getByOrderId" resultType="com.example.springcloud_provider.bean.ProductBean">
+        select id,product_name,unit_price,inventory_num,num from
+        orders_product left outer join product on product_id=id
+        where order_id=#{id}
+    </select>
+</mapper>
