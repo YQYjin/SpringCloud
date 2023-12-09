@@ -11,7 +11,7 @@ import java.util.List;
 public class StaffController {
     @Resource
     StaffService staffService;
-    @RequestMapping(value = "/getemployeeinfo/{id}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getemployeeinfo/{id}",method = RequestMethod.GET,produces = "application/json")
     public StaffBean getStaffInfo(@PathVariable String id){
         return staffService.getStaffInfo(id);
     }

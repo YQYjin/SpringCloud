@@ -206,6 +206,7 @@
                 type: "GET",
                 url: "http://localhost:8080/getemployeeinfo/" + employeeID,
                 success: function (response) {
+                    response=JSON.parse(response);
                     console.log("员工信息返回" + response);
                     $("#id").val(response.id);
                     $("#name").val(response.username);
