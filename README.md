@@ -1,5 +1,7 @@
 # SpringCloud
 分布式SpringCloud项目
+## 项目结构
+- HTML资源由User控制,Provider仅注重于API的提供
 
 > YQY 2023.12.9
 - 重置git,使子模块可以被父项目git统一管理并提交到github
