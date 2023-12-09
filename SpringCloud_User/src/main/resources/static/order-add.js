@@ -12,6 +12,7 @@ function renderProductTable(table, layer, queryName) {
         url: "http://localhost:8080/queryProduct",
         data: queryData,
         success: function (response) {
+            response=JSON.parse(response);
             productInfo = response;
             console.log("查询产品返回:", productInfo);
             // 渲染表格
@@ -144,6 +145,7 @@ function addOrder() {
         data: JSON.stringify(formData),
         contentType: "application/json;charset=utf-8",
         success: function (response) {
+            
             if (response == "success") {
                 alert("创建订单成功");
                 location.reload();

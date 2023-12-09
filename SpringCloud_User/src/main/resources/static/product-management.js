@@ -4,6 +4,7 @@ function renderProductData(table) {
         type: "GET",
         url: "http://localhost:8080/allProduct",
         success: function (response) {
+            response=JSON.parse(response);
             productData = response;
             console.log("全部产品返回:", productData);
             // 渲染表格
@@ -45,6 +46,7 @@ function renderQueryProductData(table, queryName) {
         url: "http://localhost:8080/queryProduct",
         data: queryData,
         success: function (response) {
+            response=JSON.parse(response);
             productInfo = response;
             console.log("查询产品返回:", productInfo);
             // 渲染表格

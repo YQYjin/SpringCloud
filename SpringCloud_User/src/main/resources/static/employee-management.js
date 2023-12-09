@@ -4,6 +4,7 @@ function renderEmployeeTable(table) {
         type: "GET",
         url: "http://localhost:8080/admin/allemployee",
         success: function (response) {
+            response=JSON.parse(response);
             queryCustomerInfoData = response;
             console.log("全部员工返回:", queryCustomerInfoData);
             // 渲染表格
@@ -47,6 +48,7 @@ function renderEmployeeQueryTable(table,queryName,queryPhone) {
         url: "http://localhost:8080/admin/queryemployee",
         data: queryData,
         success: function (response) {
+            response=JSON.parse(response);
             queryCustomerInfoData = response;
             console.log("查询员工返回:", queryCustomerInfoData);
             // 渲染表格

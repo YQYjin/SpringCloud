@@ -4,6 +4,7 @@ function renderOrderTable(table, customerId) {
         type: "GET",
         url: "http://localhost:8080/employee/order/bycustomerid/"+customerId,
         success: function (response) {
+            response=JSON.parse(response);
             orderInfoData = response;
             console.log("客户返回:", orderInfoData);
             orderInfoData.forEach(function (order) {

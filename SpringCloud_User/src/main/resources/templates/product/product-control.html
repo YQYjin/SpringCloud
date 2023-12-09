@@ -175,6 +175,7 @@
                 url: "http://localhost:8080/admin/getproduct",
                 data: formData,
                 success: function (response) {
+                    response=JSON.parse(response);
                     console.log("产品信息返回" + response);
                     $("#queryID").val(response.id);
                     $("#queryName").val(response.productName);

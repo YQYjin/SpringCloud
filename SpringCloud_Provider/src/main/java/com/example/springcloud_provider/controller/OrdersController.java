@@ -13,15 +13,15 @@ import java.util.Map;
 public class OrdersController {
     @Resource
     OrdersService ordersService;
-    @RequestMapping(value = "/getorderinfo/{orderID}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getorderinfo/{orderID}",method = RequestMethod.GET,produces = "application/json")
     public OrdersBean loadById(@PathVariable String orderID){
         return ordersService.getById(orderID);
     }
-    @RequestMapping(value = "/employee/order/bycustomerid/{customerID}",method = RequestMethod.GET)
+    @RequestMapping(value = "/employee/order/bycustomerid/{customerID}",method = RequestMethod.GET,produces = "application/json")
     public List<OrdersBean> loadByCustomerId(@PathVariable String customerID){
         return ordersService.getAllByCustomerId(customerID);
     }
-    @RequestMapping(value = "/addOrder",method = RequestMethod.POST)
+    @RequestMapping(value = "/addOrder",method = RequestMethod.POST,produces = "application/json")
     public String addOneOrder( @RequestBody ProductRequestBean orderData){
         //输出orderContent
         System.out.println(orderData.getCustomerName());
@@ -36,17 +36,17 @@ public class OrdersController {
         String orderRemark=orderData.getOrderRemark();
         return ordersService.addOrder(totalPrice,customerName,orderRemark,orderContent);
     }
-    @RequestMapping(value = "/updateorderstatus",method = RequestMethod.POST)
+    @RequestMapping(value = "/updateorderstatus",method = RequestMethod.POST,produces = "application/json")
     public String changeStatus(String orderID,String status){
         System.out.println(orderID+" "+status);
         return ordersService.changeStatus(orderID,status);
     }
-    @RequestMapping(value = "/deleteorder",method = RequestMethod.POST)
+    @RequestMapping(value = "/deleteorder",method = RequestMethod.POST,produces = "application/json")
     public String deleteOrder(String orderID){
         System.out.println("删除订单");
         return ordersService.deleteOrder(orderID);
     }
-    @GetMapping(value = "/admin/order/all")
+    @GetMapping(value = "/admin/order/all",produces = "application/json")
     public List<OrdersBean> getAll(){
         return ordersService.getAll();
     }

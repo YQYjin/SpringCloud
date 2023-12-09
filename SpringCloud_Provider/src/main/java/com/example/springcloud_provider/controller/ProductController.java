@@ -12,7 +12,7 @@ import java.util.Map;
 public class ProductController {
     @Resource
     ProductService productService;
-    @RequestMapping(value = "/employee/addnewproduct",method = RequestMethod.POST)
+    @RequestMapping(value = "/employee/addnewproduct",method = RequestMethod.POST,produces = "application/json")
     public String addOneProduct(@RequestBody Map<String, String> request){
         String productID=request.get("productID");
         String productName=request.get("productName");
@@ -21,7 +21,7 @@ public class ProductController {
         double unitPriceDouble=Double.parseDouble(unitPrice);
         return productService.addOneProduct(productID,productName,unitPriceDouble);
     }
-    @RequestMapping(value = "/allProduct",method = RequestMethod.GET)
+    @RequestMapping(value = "/allProduct",method = RequestMethod.GET,produces = "application/json")
     public List<ProductBean> getAll(){
         return productService.getAll();
     }
@@ -29,25 +29,25 @@ public class ProductController {
     public List<ProductBean> getByName(String name){
         return productService.getByName(name);
     }
-    @RequestMapping(value = "/admin/modifyproduct",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/modifyproduct",method = RequestMethod.POST,produces = "application/json")
     public String updateOne(String id,String name,double price,int inventory){
         return productService.update(id,name,price,inventory);
     }
-    @RequestMapping(value = "/admin/getproduct",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/getproduct",method = RequestMethod.POST,produces = "application/json")
     public ProductBean getOneById(String id){
         System.out.println(id);
         return productService.getOneById(id);
     }
-    @RequestMapping(value = "/admin/deleteproduct",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/deleteproduct",method = RequestMethod.POST,produces = "application/json")
     public String deleteOne(String id){
 
         return productService.delete(id);
     }
-    @RequestMapping(value = "/admin/addproduct",method = RequestMethod.POST)
+    @RequestMapping(value = "/admin/addproduct",method = RequestMethod.POST,produces = "application/json")
     public String addOne(String id,String productName,double unitPrice){
         return productService.addOne(id,productName,unitPrice);
     }
-    @RequestMapping(value ="/getorderinfo/content/{orderID}",method = RequestMethod.GET)
+    @RequestMapping(value ="/getorderinfo/content/{orderID}",method = RequestMethod.GET,produces = "application/json")
     public List<ProductBean> getByOrderId(@PathVariable String orderID){
         return productService.getByOrderId(orderID);
     }

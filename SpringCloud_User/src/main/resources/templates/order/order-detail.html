@@ -287,6 +287,7 @@
                     type: "GET",
                     url: "http://localhost:8080/getorderinfo/" + orderID,
                     success: function (response) {
+                        response=JSON.parse(response);
                         console.log("订单信息返回" + response);
                         $("#orderID").val(response.id);
                         $("#price").val(response.amountMoney);
@@ -314,6 +315,7 @@
                     type: "GET",
                     url: "http://localhost:8080/getcustomerinfo/byorderID/" + orderID,
                     success: function (response) {
+                        response=JSON.parse(response);
                         console.log("客户信息返回:" + response);
                         $("#customerName").val(response.username);
                         $("#gender").val(response.sex);

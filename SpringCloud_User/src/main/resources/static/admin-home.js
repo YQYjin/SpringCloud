@@ -4,6 +4,7 @@ function renderOrderData(table) {
         type: "GET",
         url: "http://localhost:8080/admin/order/all",
         success: function (response) {
+            response=JSON.parse(response);
             orderInfoData = response;
             console.log("全部订单返回:", orderInfoData);
             //遍历orderInfoData
@@ -55,6 +56,7 @@ function renderCustomerData(table) {
         type: "GET",
         url: "http://localhost:8080/admin/customer/all",
         success: function (response) {
+            response=JSON.parse(response);
             customerInfoData = response;
             console.log("全部客户返回:", customerInfoData);
             // 渲染表格

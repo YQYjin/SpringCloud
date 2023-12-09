@@ -3,6 +3,7 @@ function renderOrderContentTable(table, orderID) {
         type: "GET",
         url: "http://localhost:8080/getorderinfo/content/" + orderID,
         success: function (response) {
+            response=JSON.parse(response);
             
             // 产品列表
             let data = response;

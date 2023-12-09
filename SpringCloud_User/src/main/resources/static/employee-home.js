@@ -11,6 +11,7 @@ function renderQueryCustomerTable(table, queryName, queryPhone, employeeID) {
         url: "http://localhost:8080/employee/querycustomer",
         data: queryData,
         success: function (response) {
+            response=JSON.parse(response);
             queryCustomerInfoData = response;
             console.log("查询客户返回:", queryCustomerInfoData);
             // 渲染表格
@@ -54,6 +55,7 @@ function renderCustomerFollowTable(table, employeeID) {
         url: "http://localhost:8080/employee/getcustomer",
         data: formData,
         success: function (response) {
+            response=JSON.parse(response);
             queryCustomerInfoData = response;
             console.log("跟进客户返回:", queryCustomerInfoData);
             // 渲染表格
@@ -94,6 +96,7 @@ function renderOrderTable(table) {
         type: "GET",
         url: "http://localhost:8080/getorder",
         success: function (response) {
+            response=JSON.parse(response);
             queryCustomerInfoData = response;
             // 渲染表格
             table.render({
