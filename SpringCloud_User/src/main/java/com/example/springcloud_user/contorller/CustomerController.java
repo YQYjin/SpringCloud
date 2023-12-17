@@ -41,11 +41,13 @@ public class CustomerController {
     }
     @RequestMapping(value = "/employee/querycustomer",method = RequestMethod.POST)
     public String loadByNamePhone(String userName, String phoneNumber, String employeeID){
-        String serviceUrl=providerUrl+"/employee/querycustomer";
-        HttpHeaders headers=new HttpHeaders();
+
+        String serviceUrl=providerUrl+"/employee/querycustomer?";
         String requestBody="userName="+userName+"&phoneNumber="+phoneNumber+"&employeeID="+employeeID;
-        HttpEntity<String> requsetEntity=new HttpEntity<>(requestBody,headers);
-        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,requsetEntity,String.class);
+        System.out.println(requestBody);
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,null,String.class);
+
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -55,11 +57,10 @@ public class CustomerController {
     }
     @RequestMapping(value = "/modifycustomer",method = RequestMethod.POST)
     public String update(String id,String newName,String newSex,String newPhone,double newConsumption,String newAddress){
-        String serviceUrl=providerUrl+"/modifycustomer";
-        HttpHeaders headers=new HttpHeaders();
+        String serviceUrl=providerUrl+"/modifycustomer?";
         String requestBody="id="+id+"&newName="+newName+"&newSex="+newSex+"&newPhone="+newPhone+"&newConsumption="+newConsumption+"&newAddress="+newAddress;
-        HttpEntity<String> requsetEntity=new HttpEntity<>(requestBody,headers);
-        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,requsetEntity,String.class);
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -69,11 +70,10 @@ public class CustomerController {
     }
     @RequestMapping(value = "/modifycustomer/delete",method = RequestMethod.POST)
     public String deleteOne(String id){
-        String serviceUrl=providerUrl+"/modifycustomer/delete";
-        HttpHeaders headers=new HttpHeaders();
+        String serviceUrl=providerUrl+"/modifycustomer/delete?";
         String requestBody="id="+id;
-        HttpEntity<String> requsetEntity=new HttpEntity<>(requestBody,headers);
-        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,requsetEntity,String.class);
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -81,12 +81,13 @@ public class CustomerController {
         }
     }
     @RequestMapping(value = "/employee/getcustomer",method = RequestMethod.POST)
-    public String getByStaffId(String employeeID){
-        String serviceUrl=providerUrl+"/employee/getcustomer";
-        HttpHeaders headers=new HttpHeaders();
+    public String getByStaffId( String employeeID){
+        String serviceUrl=providerUrl+"/employee/getcustomer?";
+        //HttpHeaders headers=new HttpHeaders();
         String requestBody="employeeID="+employeeID;
-        HttpEntity<String> requsetEntity=new HttpEntity<>(requestBody,headers);
-        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,requsetEntity,String.class);
+        //HttpEntity<String> requsetEntity=new HttpEntity<>(requestBody,headers);
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,employeeID,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
         }else{
@@ -95,11 +96,10 @@ public class CustomerController {
     }
     @RequestMapping(value = "/employee/addcustomer",method = RequestMethod.POST)
     public String addOne(String id,String username,String sex,String phoneNumber,String address,String employeeID){
-        String serviceUrl=providerUrl+"/employee/addcustomer";
-        HttpHeaders headers=new HttpHeaders();
+        String serviceUrl=providerUrl+"/employee/addcustomer?";
         String requestBody="id="+id+"&username="+username+"&sex="+sex+"&phoneNumber="+phoneNumber+"&address="+address+"&employeeID="+employeeID;
-        HttpEntity<String> requsetEntity=new HttpEntity<>(requestBody,headers);
-        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,requsetEntity,String.class);
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity= restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()) {
             return responseEntity.getBody();
         }else{

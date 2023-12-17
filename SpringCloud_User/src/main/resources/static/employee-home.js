@@ -11,7 +11,9 @@ function renderQueryCustomerTable(table, queryName, queryPhone, employeeID) {
         url: "http://localhost:8080/employee/querycustomer",
         data: queryData,
         success: function (response) {
+            console.log("查询客户返回:", response);
             response=JSON.parse(response);
+
             queryCustomerInfoData = response;
             console.log("查询客户返回:", queryCustomerInfoData);
             // 渲染表格

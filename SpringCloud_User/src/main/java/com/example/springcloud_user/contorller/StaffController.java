@@ -24,11 +24,10 @@ public class StaffController {
     }
     @RequestMapping(value = "/modifyemployee",method = RequestMethod.POST)
     public String changeStaff(@RequestParam String id, @RequestParam String newName, @RequestParam String newSex, @RequestParam String newPhone){
-        String serviceUrl = providerUrl+"/modifyemployee";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "id="+id+"&newName="+newName+"&newSex="+newSex+"&newPhone="+newPhone;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl = providerUrl+"/modifyemployee?";
+        String requestBody= "id="+id+"&newName="+newName+"&newSex="+newSex+"&newPhone="+newPhone;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -37,11 +36,10 @@ public class StaffController {
     }
     @RequestMapping(value = "/modifyemployee/delete",method = RequestMethod.POST)
     public String deleteStaff(String id){
-        String serviceUrl = providerUrl+"/modifyemployee/delete";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "id="+id;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl = providerUrl+"/modifyemployee/delete?";
+        String requestBody= "id="+id;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -61,11 +59,10 @@ public class StaffController {
     }
     @RequestMapping(value = "/admin/queryemployee",method = RequestMethod.POST)
     public String loadByNamePhone(String username,String phoneNumber){
-        String serviceUrl = providerUrl+"/admin/queryemployee";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "username="+username+"&phoneNumber="+phoneNumber;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl = providerUrl+"/admin/queryemployee?";
+        String requestBody= "username="+username+"&phoneNumber="+phoneNumber;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -74,11 +71,10 @@ public class StaffController {
     }
     @RequestMapping(value = "/admin/addemployee",method = RequestMethod.POST)
     public String addOne(String addID,String addName,String addPhone,String addSex){
-        String serviceUrl = providerUrl+"/admin/addemployee";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "addID="+addID+"&addName="+addName+"&addPhone="+addPhone+"&addSex="+addSex;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl = providerUrl+"/admin/addemployee?";
+        String requestBody= "addID="+addID+"&addName="+addName+"&addPhone="+addPhone+"&addSex="+addSex;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -88,11 +84,10 @@ public class StaffController {
     }
     @RequestMapping(value = "/modifyemployee/password",method = RequestMethod.POST)
     public String updatePwd(String id,String nowPassword,String newPassword){
-        String serviceUrl = providerUrl+"/modifyemployee/password";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "id="+id+"&nowPassword="+nowPassword+"&newPassword="+newPassword;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl = providerUrl+"/modifyemployee/password?";
+        String requestBody= "id="+id+"&nowPassword="+nowPassword+"&newPassword="+newPassword;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{

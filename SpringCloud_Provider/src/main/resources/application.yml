@@ -7,7 +7,7 @@ spring:
         name: product_customer_management
         url: jdbc:mysql://localhost:3306/product_customer_management?serverTimezone=UTC
         username: root
-        password: 123456
+        password: S10wj25.
         driver-class-name: com.mysql.cj.jdbc.Driver
     application:
         name: springcloudprovider

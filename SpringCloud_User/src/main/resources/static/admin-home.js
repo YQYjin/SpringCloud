@@ -6,7 +6,7 @@ function renderOrderData(table) {
         success: function (response) {
             response=JSON.parse(response);
             orderInfoData = response;
-            console.log("全部订单返回:", orderInfoData);
+            console.log("全部订单返回:", response);
             //遍历orderInfoData
             orderInfoData.forEach(function (order) {
                 statusCode = order.completionStatus;

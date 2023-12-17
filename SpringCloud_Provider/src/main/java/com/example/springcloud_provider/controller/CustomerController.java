@@ -29,7 +29,11 @@ public class CustomerController {
     }
     @RequestMapping(value = "/employee/querycustomer",method = RequestMethod.POST,produces = "application/json")
     public List<CustomerBean> loadByNamePhone(String userName, String phoneNumber, String employeeID){
-        return customerService.loadByNamePhone(userName,phoneNumber,employeeID);
+        List<CustomerBean> rst=customerService.loadByNamePhone(userName,phoneNumber,employeeID);
+        for (CustomerBean element : rst) {
+            System.out.println(element.getUsername());
+        }
+        return rst;
     }
     @RequestMapping(value = "/modifycustomer",method = RequestMethod.POST,produces = "application/json")
     public String update(String id,String newName,String newSex,String newPhone,double newConsumption,String newAddress){
@@ -42,7 +46,6 @@ public class CustomerController {
     }
     @RequestMapping(value = "/employee/getcustomer",method = RequestMethod.POST,produces = "application/json")
     public List<CustomerBean> getByStaffId(String employeeID){
-
         return customerService.loadByEmployeeId(employeeID);
     }
     @RequestMapping(value = "/employee/addcustomer",method = RequestMethod.POST,produces = "application/json")

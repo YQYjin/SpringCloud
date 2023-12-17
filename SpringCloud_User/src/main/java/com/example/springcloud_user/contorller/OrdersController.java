@@ -55,11 +55,10 @@ public class OrdersController {
     }
     @RequestMapping(value = "/updateorderstatus",method = RequestMethod.POST)
     public String changeStatus(String orderID,String status){
-        String serviceUrl=providerUrl+"/updateorderstatus";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "orderID="+orderID+"&status="+status;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl=providerUrl+"/updateorderstatus?";
+        String requestBody= "orderID="+orderID+"&status="+status;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
@@ -69,11 +68,10 @@ public class OrdersController {
     }
     @RequestMapping(value = "/deleteorder",method = RequestMethod.POST)
     public String deleteOrder(String orderID){
-        String serviceUrl=providerUrl+"/deleteorder";
-        HttpHeaders headers = new HttpHeaders();
-        String requsetBody= "orderID="+orderID;
-        HttpEntity<String> requestEntity = new HttpEntity<>(requsetBody,headers);
-        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,requestEntity,String.class);
+        String serviceUrl=providerUrl+"/deleteorder?";
+        String requestBody= "orderID="+orderID;
+        serviceUrl=serviceUrl+requestBody;
+        ResponseEntity<String> responseEntity = restTemplate.postForEntity(serviceUrl,null,String.class);
         if(responseEntity.getStatusCode().is2xxSuccessful()){
             return responseEntity.getBody();
         }else{
