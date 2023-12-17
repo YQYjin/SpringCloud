@@ -4,6 +4,7 @@ function renderProductData(table) {
         type: "GET",
         url: "http://localhost:8080/allProduct",
         success: function (response) {
+            console.log("全部产品返回:", response);
             response=JSON.parse(response);
             productData = response;
             console.log("全部产品返回:", productData);
