@@ -1,11 +1,11 @@
 package com.example.springcloud_provider.bean;
 
 public class StaffBean {
-    String id;
-    String username;
-    String sex;
-    String password;
-    String phoneNumber;
+    private String id;
+    private String username;
+    private String sex;
+    private String password;
+    private String phoneNumber;
 
     public String getId() {
         return id;

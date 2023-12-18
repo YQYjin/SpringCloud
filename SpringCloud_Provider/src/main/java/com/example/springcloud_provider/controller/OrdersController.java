@@ -1,6 +1,7 @@
 package com.example.springcloud_provider.controller;
 
 import com.example.springcloud_provider.bean.OrdersBean;
+import com.example.springcloud_provider.bean.OrdersCustomerBean;
 import com.example.springcloud_provider.bean.ProductRequestBean;
 import com.example.springcloud_provider.serviceImpl.OrdersService;
 import org.springframework.web.bind.annotation.*;
@@ -47,7 +48,7 @@ public class OrdersController {
         return ordersService.deleteOrder(orderID);
     }
     @GetMapping(value = "/admin/order/all",produces = "application/json")
-    public List<OrdersBean> getAll(){
+    public List<OrdersCustomerBean> getAll(){
         return ordersService.getAll();
     }
 }

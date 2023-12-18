@@ -2,6 +2,7 @@ package com.example.springcloud_provider.serviceImpl;
 
 import com.example.springcloud_provider.bean.CustomerBean;
 import com.example.springcloud_provider.bean.OrdersBean;
+import com.example.springcloud_provider.bean.OrdersCustomerBean;
 import com.example.springcloud_provider.mapper.CustomerMapper;
 import com.example.springcloud_provider.mapper.OrdersMapper;
 import com.example.springcloud_provider.mapper.OrdersProductMapper;
@@ -43,7 +44,7 @@ public class OrdersService {
             return "error";
         }
     }
-    public List<OrdersBean> getAll(){
+    public List<OrdersCustomerBean> getAll(){
         return ordersMapper.getAll();
     }
     public String addOrder(double totalPrice, String customerName, String orderRemark, List<Map<String,String>> orderContent)

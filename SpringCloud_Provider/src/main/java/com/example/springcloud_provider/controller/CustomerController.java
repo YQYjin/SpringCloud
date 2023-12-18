@@ -1,6 +1,7 @@
 package com.example.springcloud_provider.controller;
 
 import com.example.springcloud_provider.bean.CustomerBean;
+import com.example.springcloud_provider.bean.CustomerStaffBean;
 import com.example.springcloud_provider.bean.OrdersBean;
 import com.example.springcloud_provider.service.CustomerService;
 import com.example.springcloud_provider.serviceImpl.OrdersService;
@@ -60,7 +61,7 @@ public class CustomerController {
         return customerService.addOne(id,username,phoneNumber,sex,address,employeeID);
     }
     @GetMapping(value = "/admin/customer/all",produces = "application/json")
-    public List<CustomerBean>getAll(){
+    public List<CustomerStaffBean>getAll(){
         return customerService.getAll();
     }
 }

@@ -22,8 +22,11 @@
         delete from orders
         where id=#{orderID}
     </delete>
-    <select id="getAll" resultType="com.example.springcloud_provider.bean.OrdersBean">
-        select * from orders
+    <select id="getAll" resultType="com.example.springcloud_provider.bean.OrdersCustomerBean">
+        select customer.id as customerId,phone_number, username,address,total_consumption,staff_id,
+               sex,recent_order_time,orders.id as orderId,order_time,amount_money,completion_status,
+               notes
+        from orders left join customer on orders.consumer_id=customer.id
         order by order_time desc
     </select>
     <select id="getNew" resultType="String">

@@ -1,6 +1,7 @@
 package com.example.springcloud_provider.service;
 
 import com.example.springcloud_provider.bean.CustomerBean;
+import com.example.springcloud_provider.bean.CustomerStaffBean;
 
 import java.util.List;
 
@@ -12,5 +13,5 @@ public interface CustomerService {
     String deleteOne(String id);
     List<CustomerBean> loadByEmployeeId(String id);
     String addOne(String id,String username,String phoneNumber,String sex,String address,String staff_id);
-    List<CustomerBean> getAll();
+    List<CustomerStaffBean> getAll();
 }

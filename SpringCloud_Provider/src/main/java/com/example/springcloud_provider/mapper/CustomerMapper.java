@@ -1,6 +1,7 @@
 package com.example.springcloud_provider.mapper;
 
 import com.example.springcloud_provider.bean.CustomerBean;
+import com.example.springcloud_provider.bean.CustomerStaffBean;
 
 import java.util.List;
 
@@ -11,6 +12,6 @@ public interface CustomerMapper {
     int deleteOne(String id);
     List<CustomerBean> getByEmployeeId(String id);
     int addOne(String id,String username,String phoneNumber,String sex,String address,String staff_id);
-    List<CustomerBean> getAll();
+    List<CustomerStaffBean> getAll();
     CustomerBean getByName(String username);
 }

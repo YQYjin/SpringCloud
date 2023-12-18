@@ -1,6 +1,7 @@
 package com.example.springcloud_provider.serviceImpl;
 
 import com.example.springcloud_provider.bean.CustomerBean;
+import com.example.springcloud_provider.bean.CustomerStaffBean;
 import com.example.springcloud_provider.mapper.CustomerMapper;
 import com.example.springcloud_provider.service.CustomerService;
 import org.springframework.stereotype.Service;
@@ -40,7 +41,7 @@ public class CustomerServiceImpl implements CustomerService {
         if(item>0) return "success";
         else return "error";
     }
-    public List<CustomerBean>getAll(){
+    public List<CustomerStaffBean>getAll(){
         return customerMapper.getAll();
     }
 }
