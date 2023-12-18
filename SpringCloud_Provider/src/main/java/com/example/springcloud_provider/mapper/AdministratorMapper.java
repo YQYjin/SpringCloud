@@ -4,4 +4,5 @@ import com.example.springcloud_provider.bean.AdministratorBean;
 
 public interface AdministratorMapper {
     public AdministratorBean getByName(String username);
+    public AdministratorBean getById(String Id);
 }

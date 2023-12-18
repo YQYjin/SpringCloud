@@ -1,6 +1,8 @@
 package com.example.springcloud_provider.controller;
 
+import com.example.springcloud_provider.bean.AdministratorBean;
 import com.example.springcloud_provider.bean.StaffBean;
+import com.example.springcloud_provider.serviceImpl.AdministratorService;
 import com.example.springcloud_provider.serviceImpl.StaffService;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,5 +42,10 @@ public class StaffController {
     @RequestMapping(value = "/modifyemployee/password",method = RequestMethod.POST,produces = "application/json")
     public String updatePwd(String id,String nowPassword,String newPassword){
         return staffService.updatePwd(id,nowPassword,newPassword);
+    }
+    @RequestMapping(value = "/employee/getpwd",method = RequestMethod.POST,produces = "application/json")
+    public StaffBean getByName(String username){
+        StaffBean rst=staffService.getByName(username);
+        return rst;
     }
 }

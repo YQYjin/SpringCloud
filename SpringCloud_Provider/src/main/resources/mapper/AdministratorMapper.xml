@@ -5,4 +5,7 @@
     <select id="getByName" resultType="com.example.springcloud_provider.bean.AdministratorBean">
         select * from administrator where username=#{username}
     </select>
+    <select id="getById" resultType="com.example.springcloud_provider.bean.AdministratorBean">
+        select * from administrator where username=#{Id}
+    </select>
 </mapper>

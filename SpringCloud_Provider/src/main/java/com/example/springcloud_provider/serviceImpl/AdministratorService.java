@@ -13,4 +13,5 @@ public class AdministratorService {
     public AdministratorBean getByName(String username){
         return administratorMapper.getByName(username);
     }
+    public AdministratorBean getById(String Id){return administratorMapper.getById(Id);}
 }
