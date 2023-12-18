@@ -32,4 +32,6 @@
 
 # 接口
 - /admin/getpwd; 用管理员的ID得到管理员的密码
-- /employee/getpwd 用员工的ID得到员工的密码
+ 字段名是username
+- /employee/getpwd 用员工的ID得到员工的密码，字段名是username
+- url格式，不需要jsonfy
