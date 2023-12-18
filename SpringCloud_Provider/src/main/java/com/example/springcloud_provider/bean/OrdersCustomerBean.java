@@ -1,7 +1,7 @@
 package com.example.springcloud_provider.bean;
 
 public class OrdersCustomerBean {
-    private int orderId;
+    private int id;
     private String orderTime;
     private double amountMoney;
     private int completionStatus;
@@ -15,12 +15,12 @@ public class OrdersCustomerBean {
     private String staffId;
     private String sex;
 
-    public int getOrderId() {
-        return orderId;
+    public int getId() {
+        return id;
     }
 
-    public void setOrderId(int orderId) {
-        this.orderId = orderId;
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getOrderTime() {

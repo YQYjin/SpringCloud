@@ -32,8 +32,8 @@
         values (#{id},#{phoneNumber},#{username},#{address},#{staff_id},#{sex},'2023:01:01 00:00:00')
     </insert>
     <select id="getAll" resultType="com.example.springcloud_provider.bean.CustomerStaffBean">
-        SELECT customer.id as customerId,customer.phone_number as customerPhoneNumber,customer.username as customerUsername,
-               address,total_consumption, customer.sex as customerSex,recent_order_time ,
+        SELECT customer.id as id,customer.phone_number as phoneNumber,customer.username as username,
+               address,total_consumption, customer.sex as sex,recent_order_time ,
                staff.id as staffId,staff.username as staffUsername, staff.sex as staffSex,password,
                staff.phone_number as staffPhoneNumber
                FROM customer left join staff

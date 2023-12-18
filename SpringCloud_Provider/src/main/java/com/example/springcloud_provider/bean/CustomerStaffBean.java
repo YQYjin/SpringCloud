@@ -1,42 +1,19 @@
 package com.example.springcloud_provider.bean;
 
 public class CustomerStaffBean {
-    private String customerId;
-    private String customerPhoneNumber;
-    private String customerUsername;
+    private String id;
+    private String phoneNumber;
+    private String username;
     private String address;
     private double totalConsumption;
     private String recentOrderTime;
-    private String customerSex;
+    private String sex;
     private String staffId;
     private String staffUsername;
     private String staffSex;
     private String password;
     private String staffPhoneNumber;
 
-    public String getCustomerId() {
-        return customerId;
-    }
-
-    public void setCustomerId(String customerId) {
-        this.customerId = customerId;
-    }
-
-    public String getCustomerPhoneNumber() {
-        return customerPhoneNumber;
-    }
-
-    public void setCustomerPhoneNumber(String customerPhoneNumber) {
-        this.customerPhoneNumber = customerPhoneNumber;
-    }
-
-    public String getCustomerUsername() {
-        return customerUsername;
-    }
-
-    public void setCustomerUsername(String customerUsername) {
-        this.customerUsername = customerUsername;
-    }
 
     public String getAddress() {
         return address;
@@ -62,12 +39,36 @@ public class CustomerStaffBean {
         this.recentOrderTime = recentOrderTime;
     }
 
-    public String getCustomerSex() {
-        return customerSex;
+    public String getId() {
+        return id;
     }
 
-    public void setCustomerSex(String customerSex) {
-        this.customerSex = customerSex;
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
     }
 
     public String getStaffId() {

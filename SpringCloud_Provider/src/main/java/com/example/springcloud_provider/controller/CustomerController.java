@@ -20,7 +20,7 @@ public class CustomerController {
     public CustomerBean load(@PathVariable String customerID){
         return customerService.load(customerID);
     }
-    @RequestMapping(value = "/getcustomerinfo/byorderID/{orderID}",method = RequestMethod.GET)
+    @RequestMapping(value = "/getcustomerinfo/byorderID/{orderID}",method = RequestMethod.GET,produces = "application/json")
     public CustomerBean loadbyOrder(@PathVariable String orderID){
         OrdersBean ordersBean=ordersService.getById(orderID);
         String customerID=ordersBean.getConsumerId();
