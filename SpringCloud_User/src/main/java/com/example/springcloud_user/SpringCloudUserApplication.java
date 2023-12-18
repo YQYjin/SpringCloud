@@ -12,7 +12,6 @@ import org.springframework.web.client.RestTemplate;
 public class SpringCloudUserApplication {
 
     @Bean
-    @LoadBalanced
     // 负载均衡功能
     public RestTemplate restTemplate(){
         return new RestTemplate();
