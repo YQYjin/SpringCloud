@@ -137,6 +137,7 @@
                                         <th lay-data="{field:'orderTime', width:100}">下单时间</th>
                                         <th lay-data="{field:'amountMoney', width:100}">订单金额</th>
                                         <th lay-data="{field:'completionStatus', width:100}">完成状态</th>
+                                        <th lay-data="{field:'customername', width:100}">所属客户</th>
                                         <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作
                                         </th>
                                     </tr>
@@ -167,6 +168,7 @@
                                         <th lay-data="{field:'gender', width:100}">客户性别</th>
                                         <th lay-data="{field:'phoneNumber', width:100}">客户电话</th>
                                         <th lay-data="{field:'totalConsumption', width:100}">消费额</th>
+                                        <th lay-data="{field:'employeename', width:100}">所属员工</th>
                                         <th lay-data="{fixed:'right', width:150, align:'center', toolbar:'#bar'}">操作
                                         </th>
                                     </tr>
@@ -182,7 +184,14 @@
 <script type="text/html" id="bar">
         <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="click">管理</button>
     </script>
-
+    <script type="text/html" id="bar1">
+        <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="customerClick">查看客户</button>
+        <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="click">查看订单</button>
+    </script>
+    <script type="text/html" id="bar2">
+        <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="employeeClick">查看员工</button>
+        <button class="layui-btn layui-btn-normal layui-btn-xs" lay-event="click">查看客户</button>
+    </script>
 
 <!-- 引入jQuery和Bootstrap的JavaScript -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>

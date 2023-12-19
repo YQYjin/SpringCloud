@@ -4,7 +4,7 @@ function renderOrderData(table) {
         type: "GET",
         url: "http://localhost:8080/admin/order/all",
         success: function (response) {
-            response=JSON.parse(response);
+            response = JSON.parse(response);
             orderInfoData = response;
             console.log("全部订单返回:", response);
             //遍历orderInfoData
@@ -30,7 +30,8 @@ function renderOrderData(table) {
                     { field: 'orderTime', width: 200, title: '交易日期' },
                     { field: 'amountMoney', title: '订单金额' },
                     { field: 'completionStatus', title: '订单状态' },
-                    { fixed: 'right', align: 'center', toolbar: '#bar', title: '操作' }
+                    { field: 'username', title: '客户姓名' },
+                    { fixed: 'right', align: 'center', toolbar: '#bar1', title: '操作' }
                 ]],
                 page: true
             });
@@ -41,6 +42,9 @@ function renderOrderData(table) {
                     var selectedData = obj.data;
                     console.log("查看", selectedData);
                     window.location.href = "http://localhost:8080/employee/orderDetail/" + selectedData.id;
+                } else if (obj.event == 'customerClick') {
+                    var selectedData = obj.data;
+                    window.location.href = "http://localhost:8080/employee/customerDetail/" + selectedData.customerId;
                 }
             });
         },
@@ -56,7 +60,7 @@ function renderCustomerData(table) {
         type: "GET",
         url: "http://localhost:8080/admin/customer/all",
         success: function (response) {
-            response=JSON.parse(response);
+            response = JSON.parse(response);
             customerInfoData = response;
             console.log("全部客户返回:", customerInfoData);
             // 渲染表格
@@ -71,7 +75,8 @@ function renderCustomerData(table) {
                     { field: 'sex', title: '客户性别' },
                     { field: 'phoneNumber', title: '客户电话' },
                     { field: 'totalConsumption', title: '消费额' },
-                    { fixed: 'right', align: 'center', toolbar: '#bar', title: '操作' }
+                    { field: 'staffUsername', title: '员工姓名' },
+                    { fixed: 'right', align: 'center', toolbar: '#bar2', title: '操作' }
                 ]],
                 page: true
             });
@@ -83,6 +88,9 @@ function renderCustomerData(table) {
                     var selectedData = obj.data;
                     console.log("查看", selectedData);
                     window.location.href = "http://localhost:8080/employee/customerDetail/" + selectedData.id;
+                } else if (obj.event == 'employeeClick') {
+                    var selectedData = obj.data;
+                    window.location.href = "http://localhost:8080/admin/employeeinfo/" + selectedData.staffId;
                 }
             });
         },

@@ -7,6 +7,8 @@ import com.example.springcloud_provider.serviceImpl.StaffService;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @RestController
@@ -44,8 +46,10 @@ public class StaffController {
         return staffService.updatePwd(id,nowPassword,newPassword);
     }
     @RequestMapping(value = "/employee/getpwd",method = RequestMethod.POST,produces = "application/json")
-    public StaffBean getByName(String username){
-        StaffBean rst=staffService.getByName(username);
+    public StaffBean getByName(String username) throws UnsupportedEncodingException {
+        String decodedUsername = URLDecoder.decode(username, "UTF-8");
+        System.out.println("decodedUsername:"+decodedUsername);
+        StaffBean rst=staffService.getByName(decodedUsername);
         return rst;
     }
 }

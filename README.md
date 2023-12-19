@@ -23,7 +23,9 @@
 - 修改User,将原Controller中的方法改为向Provider获取服务
 - 未进行测试
 
-
+# 接口
+- /admin/order/all: 功能变更,返回所有订单+该订单所属客户信息(客户姓名+客户ID)
+- /admin/customer/all: 功能变更,返回所有客户+该客户所属员工信息(员工姓名+员工ID)
 
 # 问题
 
