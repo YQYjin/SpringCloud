@@ -26,7 +26,7 @@ public class EmployeeUserDetailSerivce implements UserDetailsService {
 
     @Autowired
     RestTemplate restTemplate;
-    String providerUrl = "http://localhost:8881";
+    String providerUrl = "http://SPRINGCLOUDPROVIDER";
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 

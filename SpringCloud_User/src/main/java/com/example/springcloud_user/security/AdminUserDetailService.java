@@ -25,7 +25,7 @@ import java.util.List;
 public class AdminUserDetailService implements UserDetailsService {
     @Autowired
     RestTemplate restTemplate;
-    String providerUrl = "http://localhost:8881";
+    String providerUrl = "http://SPRINGCLOUDPROVIDER";
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("尝试加载Admin: "+"username:"+username);

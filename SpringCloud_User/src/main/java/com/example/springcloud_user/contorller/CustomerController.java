@@ -15,7 +15,7 @@ import java.util.List;
 public class CustomerController {
     @Autowired
     RestTemplate restTemplate;
-    String providerUrl = "http://localhost:8881";
+    String providerUrl = "http://SPRINGCLOUDPROVIDER";
     @RequestMapping(value = "/getcustomerinfo/{customerID}",method = RequestMethod.GET)
     public String load(@PathVariable String customerID){
         String serviceUrl=providerUrl+"/getcustomerinfo/"+customerID;

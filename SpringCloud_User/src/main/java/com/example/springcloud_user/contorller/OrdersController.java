@@ -16,7 +16,7 @@ import java.util.Map;
 public class OrdersController {
     @Autowired
     RestTemplate restTemplate;
-    String providerUrl = "http://localhost:8881";
+    String providerUrl = "http://SPRINGCLOUDPROVIDER";
     @RequestMapping(value = "/getorderinfo/{orderID}",method = RequestMethod.GET)
     public String loadById(@PathVariable String orderID){
         String serviceUrl=providerUrl+"/getorderinfo/"+orderID;

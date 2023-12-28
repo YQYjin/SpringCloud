@@ -11,7 +11,7 @@ import org.springframework.web.client.RestTemplate;
 public class StaffController {
     @Autowired
     RestTemplate restTemplate;
-    String providerUrl = "http://localhost:8881";
+    String providerUrl = "http://SPRINGCLOUDPROVIDER";
     @RequestMapping(value = "/getemployeeinfo/{id}",method = RequestMethod.GET)
     public String getStaffInfo(@PathVariable String id){
         String serviceUrl = providerUrl+"/getemployeeinfo/"+id;

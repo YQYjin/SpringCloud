@@ -14,7 +14,7 @@ import java.util.Map;
 public class ProductController {
     @Autowired
     RestTemplate restTemplate;
-    String providerUrl = "http://localhost:8881";
+    String providerUrl = "http://SPRINGCLOUDPROVIDER";
     @RequestMapping(value = "/employee/addnewproduct",method = RequestMethod.POST)
     public String addOneProduct(@RequestBody Map<String, String> request){
         String productID=request.get("productID");
